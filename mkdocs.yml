@@ -15,8 +15,8 @@ theme:
     icon:
         logo: material/library
         repo: material/ship-wheel
-    logo:
-        img/sk_logo.png
+    logo: img/sk_logo.png
+    favicon: img/sk_logo.png
 
 # Extras
 extra:
