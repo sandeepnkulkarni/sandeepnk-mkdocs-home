@@ -1,0 +1,47 @@
+site_name: Sandeep Kulkarni
+    
+theme:
+    name: material
+    language: en
+    features:
+        - tabs
+        - instant
+    palette:
+        primary: indigo
+        accent: indigo
+    font:
+        text: Roboto
+        code: Roboto Mono
+    icon:
+        logo: material/library
+        repo: material/ship-wheel
+    logo:
+        img/sk_logo.png
+
+# Extras
+extra:
+    social:
+        - icon: fontawesome/brands/github
+          link: https://github.com/sandeepnkulkarni
+
+# Extensions
+markdown_extensions:
+    - admonition
+    - codehilite
+    - pymdownx.tabbed
+    - pymdownx.emoji:
+        emoji_index: !!python/name:materialx.emoji.twemoji
+        emoji_generator: !!python/name:materialx.emoji.to_svg
+    - pymdownx.superfences
+    - toc:
+        permalink: true
+
+plugins:
+    - awesome-pages
+    - search: # necessary for search to work
+        lang:
+            - en
+        prebuild_index: true
+      
+# Copyright
+copyright: Copyright &copy; 2020 Sandeep Kulkarni

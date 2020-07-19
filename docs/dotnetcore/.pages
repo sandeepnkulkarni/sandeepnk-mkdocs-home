@@ -1,0 +1,8 @@
+title: '.Net Core'
+arrange:
+  - introduction.md
+  - create-first-dotnetcore-console-app-on-ubuntu.md
+  - run-dotnetcore-console-app-in-docker.md
+  - create-self-contained-dotnetcore-docker-image.md
+  - multi-stage-docker-build-dotnet-core-console-appliction.md
+  - multi-stage-docker-build-dotnet-core-3.1-console-appliction.md

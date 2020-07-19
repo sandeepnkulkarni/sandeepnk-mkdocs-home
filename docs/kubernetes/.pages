@@ -1,0 +1,6 @@
+title: 'Kubernetes'
+arrange:
+  - introduction.md
+  - single-node-k8s-ubuntu-gcp-kubeadm.md
+  - add-worker-node.md
+  - reset-kubernetes-cluster.md
