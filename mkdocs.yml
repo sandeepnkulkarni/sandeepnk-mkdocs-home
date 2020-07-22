@@ -16,7 +16,7 @@ theme:
         logo: material/library
         repo: material/ship-wheel
     logo: img/sk_logo.png
-    favicon: img/sk_logo.png
+    favicon: img/sk_favicon.png
 
 # Extras
 extra:
@@ -42,6 +42,6 @@ plugins:
         lang:
             - en
         prebuild_index: true
-      
+     
 # Copyright
 copyright: Copyright &copy; 2020 Sandeep Kulkarni
