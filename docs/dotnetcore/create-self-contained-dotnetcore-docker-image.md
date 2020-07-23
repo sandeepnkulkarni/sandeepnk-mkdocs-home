@@ -1,12 +1,12 @@
 ---
-title: 'Create self-contained .Net Core console application docker image'
+title: 'Create self-contained .NET Core console application Docker image'
 ---
 
-Refer to section **Create new console application** in [Create your first .Net Core console application on Ubuntu](create-first-dotnetcore-console-app-on-ubuntu.md) to understand basics about how to create .Net Core console application. We will re-use the application created here.
+Refer to section **Create new console application** in [Create your first .NET Core console application on Ubuntu](create-first-dotnetcore-console-app-on-ubuntu.md) to understand basics about how to create .NET Core console application. We will re-use the application created here.
 
 ## Enabling the Globalization Invariant Mode
 
-Open hellodocker.csproj and enable Globalization Invariant Mode by adding following line under `<PropertyGroup>` tag.
+Open `hellodocker.csproj` and enable Globalization Invariant Mode by adding following line under `<PropertyGroup>` tag.
 
 ```xml
 <InvariantGlobalization>true</InvariantGlobalization>
@@ -76,26 +76,28 @@ In case you like to use Globalization feature instead, you will need to install 
 
 To create a self-contained along with runtime identifier for Linux x64 (suitable for most desktop distributions like CentOS, Debian, Fedora, Ubuntu, and derivatives), run below command:
 
-```bash
-dotnet publish --configuration Release --self-contained true --runtime linux-x64
-```
+=== "Command"
 
-Sample output:
+    ```bash
+    dotnet publish --configuration Release --self-contained true --runtime linux-x64
+    ```
 
-```text
-Microsoft (R) Build Engine version 16.2.37902+b5aaefc9f for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
+=== "Sample output"
 
-  Restore completed in 441.66 ms for /home/testuser/hellodocker/hellodocker.csproj.
-  hellodocker -> /home/testuser/hellodocker/bin/Release/netcoreapp2.1/linux-x64/hellodocker.dll
-  hellodocker -> /home/testuser/hellodocker/bin/Release/netcoreapp2.1/linux-x64/publish/
-```
+    ```text
+    Microsoft (R) Build Engine version 16.2.37902+b5aaefc9f for .NET Core
+    Copyright (C) Microsoft Corporation. All rights reserved.
+    
+      Restore completed in 441.66 ms for /home/testuser/hellodocker/hellodocker.csproj.
+      hellodocker -> /home/testuser/hellodocker/bin/Release/netcoreapp2.1/linux-x64/hellodocker.dll
+      hellodocker -> /home/testuser/hellodocker/bin/Release/netcoreapp2.1/linux-x64/publish/
+    ```
 
 It will have around 184 files (72 MB) in the output directory `bin/Release/netcoreapp2.1/linux-x64/publish/` because it contains the .NET Core runtime along with your application.
 
 ## Create Docker image
 
-In other article [Run .Net Core console application inside Docker container](run-dotnetcore-console-app-in-docker.md), we have used mcr.microsoft.com/dotnet/core/runtime:2.1 as base image. It was done because we were in need of .Net Core runtime which allows us to run application.
+In another tutorial [Run .NET Core console application inside Docker container](run-dotnetcore-console-app-in-docker.md), we have used mcr.microsoft.com/dotnet/core/runtime:2.1 as base image. It was done because we were in need of .NET Core runtime which allows us to run application.
 
 But this time, we can use any Linux docker image as base because we have published self-contained application. We will use ubuntu:18.04 and compile the Docker image.
 
@@ -111,60 +113,66 @@ ENTRYPOINT ["./hellodocker"]
 
 Docker image can be created with below command:
 
-```bash
-docker build -t hellodocker:2.0 .
-```
+=== "Command"
 
-In above command, with parameter -t we have specified that we want to name docker image hellodocker and tag as 2.0.
+    ```bash
+    docker build -t hellodocker:2.0 .
+    ```
 
-Sample output:
+=== "Sample output"
 
-```text
-Sending build context to Docker daemon 76.11 MB
-Step 1/4 : FROM ubuntu:18.04
- ---> 8e4ce0a6ce69
-Step 2/4 : WORKDIR /app
- ---> Using cache
- ---> b26d48ea93c9
-Step 3/4 : COPY /bin/Release/netcoreapp2.1/linux-x64/publish/ .
- ---> d454fc295dda
-Removing intermediate container 3c7cc8f26d7b
-Step 4/4 : ENTRYPOINT ./hellodocker
- ---> Running in d05ba4f6e320
- ---> 9c47434bb6f7
-Removing intermediate container d05ba4f6e320
-Successfully built 9c47434bb6f7
-```
+    ```text
+    Sending build context to Docker daemon 76.11 MB
+    Step 1/4 : FROM ubuntu:18.04
+     ---> 8e4ce0a6ce69
+    Step 2/4 : WORKDIR /app
+     ---> Using cache
+     ---> b26d48ea93c9
+    Step 3/4 : COPY /bin/Release/netcoreapp2.1/linux-x64/publish/ .
+     ---> d454fc295dda
+    Removing intermediate container 3c7cc8f26d7b
+    Step 4/4 : ENTRYPOINT ./hellodocker
+     ---> Running in d05ba4f6e320
+     ---> 9c47434bb6f7
+    Removing intermediate container d05ba4f6e320
+    Successfully built 9c47434bb6f7
+    ```
 
-## Run docker container
+In above command, with parameter `-t` we have specified that we want to name docker image `hellodocker` and tag as `2.0`.
 
-To run the docker image as a container, use below command:
+## Run Docker image as container
 
-```bash
-docker run --name hellodocker2 hellodocker:2.0
-```
+To run the Docker image as a container, use below command:
 
-Sample output:
+=== "Command"
 
-```text
-Hello Docker!
-```
+    ```bash
+    docker run --name hellodocker2 hellodocker:2.0
+    ```
+
+=== "Sample output"
+
+    ```text
+    Hello Docker!
+    ```
 
 ## Docker image size difference
 
-As we have used a different base image and included only the required .Net Core runtime for the application, docker image size is smaller. This can be verified by running `docker images` command:
+As we have used a different base image and included only the required .NET Core runtime for the application, Docker image size is smaller. This can be verified by running `docker images` command:
 
-```bash
-$ docker images
-```
+=== "Command"
 
-Sample output:
+    ```bash
+    $ docker images
+    ```
 
-```text
-REPOSITORY         TAG                 IMAGE ID            CREATED             SIZE  
-hellodocker        2.0                 9ff4eeed6631        2 minutes ago       138 MB
-hellodocker        1.0                 0a19597e8d5e        24 hours ago        180 MB
-```
+=== "Sample output"
+
+    ```text
+    REPOSITORY         TAG                 IMAGE ID            CREATED             SIZE  
+    hellodocker        2.0                 9ff4eeed6631        2 minutes ago       138 MB
+    hellodocker        1.0                 0a19597e8d5e        24 hours ago        180 MB
+    ```
 
 If we use smaller docker images like Alpine (or for that matter any slim docker image), size will reduce even further. We will look into it in next blog post.
 
@@ -206,32 +214,36 @@ docker build -t hellodocker:2.1 .
 
 We are adding a tag `2.1` to differntiate it from earlier images we created.
 
-```bash
-$ docker run --name hellodocker21 hellodocker:2.1
-```
+=== "Command"
 
-Sample output:
+    ```bash
+    $ docker run --name hellodocker21 hellodocker:2.1
+    ```
 
-```text
-Hello Docker!
-```
+=== "Sample output"
+
+    ```text
+    Hello Docker!
+    ```
 
 We can do a size comparison again now:
 
-```bash
-$ docker images
-```
+=== "Command"
 
-Sample output:
+    ```bash
+    $ docker images
+    ```
 
-```text
-REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-hellodocker         2.1                 48e8d067af2f        4 minutes ago       244MB
-hellodocker         2.0                 9ff4eeed6631        4 days ago          138MB
-hellodocker         1.0                 0a19597e8d5e        5 days ago          180MB
-```
+=== "Sample output"
 
-As we have added new packages to run .Net Core application with Globalization support, size of docker image has increased significantly.
+    ```text
+    REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+    hellodocker         2.1                 48e8d067af2f        4 minutes ago       244MB
+    hellodocker         2.0                 9ff4eeed6631        4 days ago          138MB
+    hellodocker         1.0                 0a19597e8d5e        5 days ago          180MB
+    ```
+
+As we have added new packages to run .NET Core application with Globalization support, size of docker image has increased significantly.
 
 ## References
 
