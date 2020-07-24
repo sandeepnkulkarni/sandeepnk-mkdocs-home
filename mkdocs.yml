@@ -1,5 +1,6 @@
 site_name: Sandeep Kulkarni
-    
+
+# Theme
 theme:
     name: material
     language: en
@@ -12,9 +13,6 @@ theme:
     font:
         text: Roboto
         code: Roboto Mono
-    icon:
-        logo: material/library
-        repo: material/ship-wheel
     logo: img/sk_logo.png
     favicon: img/sk_favicon.png
 
@@ -30,18 +28,19 @@ markdown_extensions:
     - codehilite
     - pymdownx.tabbed
     - pymdownx.emoji:
-        emoji_index: !!python/name:materialx.emoji.twemoji
-        emoji_generator: !!python/name:materialx.emoji.to_svg
+          emoji_index: !!python/name:materialx.emoji.twemoji
+          emoji_generator: !!python/name:materialx.emoji.to_svg
     - pymdownx.superfences
     - toc:
-        permalink: true
+          permalink: true
 
+# Plugins
 plugins:
     - awesome-pages
     - search: # necessary for search to work
-        lang:
-            - en
-        prebuild_index: true
-     
+          lang:
+              - en
+          prebuild_index: true
+
 # Copyright
 copyright: Copyright &copy; 2020 Sandeep Kulkarni
