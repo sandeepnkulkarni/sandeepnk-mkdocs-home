@@ -5,11 +5,21 @@ theme:
     name: material
     language: en
     features:
-        - tabs
-        - instant
+        - navigation.tabs
+        - navigation.instant
+        - navigation.sections
+        - toc.integrate
+        - navigation.top
+        - header.autohide
     palette:
-        primary: indigo
-        accent: indigo
+        - scheme: default
+          toggle:
+            icon: material/weather-sunny
+            name: Switch to dark mode
+        - scheme: slate 
+          toggle:
+            icon: material/weather-night
+            name: Switch to light mode
     font:
         text: Roboto
         code: Roboto Mono
@@ -25,8 +35,11 @@ extra:
 # Extensions
 markdown_extensions:
     - admonition
-    - codehilite
-    - pymdownx.tabbed
+    - pymdownx.details
+    - pymdownx.highlight
+    - pymdownx.inlinehilite
+    - pymdownx.tabbed:
+          alternate_style: true
     - pymdownx.emoji:
           emoji_index: !!python/name:materialx.emoji.twemoji
           emoji_generator: !!python/name:materialx.emoji.to_svg
@@ -43,4 +56,4 @@ plugins:
           prebuild_index: true
 
 # Copyright
-copyright: Copyright &copy; 2020 Sandeep Kulkarni
+copyright: Copyright &copy; 2022 Sandeep Kulkarni
